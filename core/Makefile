@@ -2679,6 +2679,16 @@ endif # BOARD_PREBUILT_DTBOIMAGE
 	    echo $(part) >> $(zip_root)/META/pack_radioimages.txt;)
 	$(hide) echo "ota_override_device=$(OTA_SCRIPT_OVERRIDE_DEVICE)" >> $(zip_root)/META/misc_info.txt
 	$(hide) echo "ota_override_prop=$(OTA_SCRIPT_OVERRIDE_PROP)" >> $(zip_root)/META/misc_info.txt
+ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
+	$(hide) vendor/aosip/build/tools/getb64key.py $(PRODUCT_DEFAULT_DEV_CERTIFICATE).x509.pem > $(zip_root)/META/releasekey.txt
+else
+	$(hide) vendor/aosip/build/tools/getb64key.py $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem > $(zip_root)/META/releasekey.txt
+endif
+	@# Zip everything up, preserving symlinks and placing META/ files first to
+	@# help early validation of the .zip file while uploading it.
+	$(hide) (cd $(zip_root) && \
+	        zip -qryX ../$(notdir $@) ./META && \
+	        zip -qryXu ../$(notdir $@) .)
 	@# Run fs_config on all the system, vendor, boot ramdisk,
 	@# and recovery ramdisk files in the zip, and save the output
 	$(hide) $(call fs_config,$(zip_root)/SYSTEM,system/) > $(zip_root)/META/filesystem_config.txt
