@@ -212,10 +212,7 @@ def AppendAssertions(script, info_dict, oem_dicts=None):
   oem_props = info_dict.get("oem_fingerprint_properties")
   if not oem_props:
     if OPTIONS.override_device == "auto":
-      if OPTIONS.override_prop:
-        device = GetBuildProp("ro.build.product", info_dict)
-      else:
-        device = GetBuildProp("ro.product.device", info_dict)
+      device = GetBuildProp("ro.product.device", info_dict)
     else:
       device = OPTIONS.override_device
     script.AssertDevice(device)
@@ -419,7 +416,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
         "post-timestamp": GetBuildProp("ro.build.date.utc", OPTIONS.info_dict),
     }
   else:
-  metadata = {
+    metadata = {
       "post-build": target_fp,
       "pre-device": GetOemProperty("ro.product.device", oem_props,
                                    oem_dicts and oem_dicts[0],
@@ -682,7 +679,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
         "ota-type": "BLOCK",
     }
   else:
-  metadata = {
+    metadata = {
       "pre-device": GetOemProperty("ro.product.device", source_oem_props,
                                    oem_dicts and oem_dicts[0],
                                    OPTIONS.source_info_dict),
@@ -1124,17 +1121,19 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   if oem_props:
     oem_dicts = _LoadOemDicts(None)
 
-  metadata = {
-      "post-build": CalculateFingerprint(oem_props, oem_dicts and oem_dicts[0],
-                                         OPTIONS.info_dict),
-      "post-build-incremental" : GetBuildProp("ro.build.version.incremental",
-                                              OPTIONS.info_dict),
-      "pre-device": GetOemProperty("ro.product.device", oem_props,
+  metadata = {}
+  if not OPTIONS.override_prop:
+    metadata["pre-device"] = GetOemProperty("ro.product.device", oem_props,
                                    oem_dicts and oem_dicts[0],
-                                   OPTIONS.info_dict),
-      "ota-required-cache": "0",
-      "ota-type": "AB",
-  }
+                                   OPTIONS.info_dict)
+    metadata["post-build"] = CalculateFingerprint(oem_props, oem_dicts and oem_dicts[0],
+                                         OPTIONS.info_dict)
+    metadata["post-build-incremental"] = GetBuildProp("ro.build.version.incremental",
+                                              OPTIONS.info_dict)
+
+  metadata["post-timestamp"] = GetBuildProp("ro.build.date.utc", OPTIONS.info_dict)
+  metadata["ota-required-cache"] = "0"
+  metadata["ota-type"] = "AB"
 
   if source_file is not None:
     metadata["pre-build"] = CalculateFingerprint(oem_props,
