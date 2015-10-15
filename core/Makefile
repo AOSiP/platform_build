@@ -56,7 +56,6 @@ unique_product_copy_files_destinations :=
 
 # -----------------------------------------------------------------
 # Define rules to copy headers defined in copy_headers.mk
-# If more than one makefile declared a header, print a warning,
 # then copy the last one defined. This matches the previous make
 # behavior.
 $(foreach dest,$(ALL_COPIED_HEADERS), \
@@ -2808,4 +2807,5 @@ include $(BUILD_SYSTEM)/product-graph.mk
 # we need the addon rules defined.
 ifneq ($(sdk_repo_goal),)
 include $(TOPDIR)development/build/tools/sdk_repo.mk
+endif
 endif
