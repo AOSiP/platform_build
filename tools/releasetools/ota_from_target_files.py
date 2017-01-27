@@ -694,6 +694,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     # Stage 3/3: Make changes.
     script.Comment("Stage 3/3")
 
+  # Dump fingerprints
+  #script.Print("Target: %s" % CalculateFingerprint(
+  #    oem_props, oem_dict, OPTIONS.info_dict))
   script.Print("--------------------------------------------------")
   script.Print("    / AAAAAA  / OOOOOO   /ssssss /ii| /PPPPPP     ")
   script.Print("   / AA__  AA/ OO__  OO /SS__ SS||__/| PP__ PP    ")
@@ -706,13 +709,15 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("                                                  ")
   script.Print("         Are you ready for the Illusion?          ")
   script.Print("--------------------------------------------------")
-  device = GetBuildProp("ro.product.device", OPTIONS.info_dict)
-  model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
-  modver = GetBuildProp("ro.aosip.version", OPTIONS.info_dict)
   script.Print(" ")
-  script.Print("Device: %s (%s)"%(model, device))
-  script.Print("Version: %s"%(modver)); 
-  script.AppendExtra("sleep (2);")
+  device = GetBuildProp("ro.aosip.device", OPTIONS.info_dict)
+  modver = GetBuildProp("ro.aosip.version", OPTIONS.info_dict)
+  if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:
+    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
+    script.Print("Device: %s (%s)"%(model, device))
+  else:
+  	script.Print("Device: %s "%(device))
+  script.Print("Version: %s"%(modver));
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
 
   device_specific.FullOTA_InstallBegin()
@@ -903,7 +908,8 @@ def GetBuildProp(prop, info_dict):
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
-    raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+    print ("WARNING: could not find %s in build.prop" % (prop,))
+    return None
 
 
 def AddToKnownPaths(filename, known_paths):
