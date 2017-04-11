@@ -416,6 +416,13 @@ else ifeq ($(my_clang),)
     my_clang := true
 endif
 
+my_sdclang := $(strip $(LOCAL_SDCLANG))
+ifeq ($(SDCLANG),true)
+    ifeq ($(my_sdclang),)
+        my_sdclang := true
+    endif
+endif
+
 ifeq ($(LOCAL_C_STD),)
     my_c_std_version := $(DEFAULT_C_STD_VERSION)
 else ifeq ($(LOCAL_C_STD),experimental)
