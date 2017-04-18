@@ -6,6 +6,11 @@ print_build_config_vars := \
   TARGET_ARCH_VARIANT \
   TARGET_CPU_VARIANT \
 
+ifeq ($(SDCLANG),true)
+print_build_config_vars += \
+  TARGET_USE_SDCLANG
+endif
+
 ifneq ($(TARGET_2ND_ARCH_VARIANT),)
 print_build_config_vars += \
   TARGET_2ND_ARCH_VARIANT
