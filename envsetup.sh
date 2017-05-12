@@ -126,8 +126,8 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^jdc_") ; then
-       CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^jdc_//g')
+    if (echo -n $1 | grep -q -e "^aosip_") ; then
+       CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^aosip_//g')
     else
        CUSTOM_BUILD=
     fi

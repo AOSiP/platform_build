@@ -181,7 +181,7 @@ include $(BUILD_SYSTEM)/device.mk
 
 # A CUSTOM build needs only the CUSTOM product makefiles.
 ifneq ($(CUSTOM_BUILD),)
-  all_product_configs := $(shell ls vendor/aosp/products/jdc_$(CUSTOM_BUILD).mk)
+  all_product_configs := $(shell ls vendor/aosip/products/aosip_$(CUSTOM_BUILD).mk)
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
