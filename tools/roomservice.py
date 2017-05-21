@@ -46,8 +46,8 @@ default_manifest = ".repo/manifest.xml"
 custom_local_manifest = ".repo/local_manifests/aosip_manifest.xml"
 custom_default_revision = "nougat-mr2"
 custom_dependencies = "aosip.dependencies"
-org_manifest = "devices"  # leave empty if org is provided in manifest
-org_display = "AOSiP-Devices"  # needed for displaying
+org_manifest = "aosip"  # leave empty if org is provided in manifest
+org_display = "AOSiP"  # needed for displaying
 
 github_auth = None
 
