@@ -730,9 +730,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   if OPTIONS.backuptool:
     script.Mount("/system")
-    script.Print("BackupTools: starting backup script")
     script.RunBackup("backup")
-    script.Print("BackupTools: DONE! Now real installation will begin")
     script.Unmount("/system")
 
   system_progress = 0.75
@@ -820,9 +818,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.ShowProgress(0.02, 10)
     if block_based:
       script.Mount("/system")
-    script.Print("BackupTools: Restoring backup")
     script.RunBackup("restore")
-    script.Print("BackupTools: DONE!")
     if block_based:
       script.Unmount("/system")
 
@@ -836,19 +832,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.AppendExtra(OPTIONS.extra_script)
 
   script.UnmountAll()
-  
-  # Install Magisk.
-  
-  script.Print("Extracting Magisk...");
-  script.AppendExtra('package_extract_dir("install/magisk", "/tmp/magisk");')
-  script.AppendExtra('run_program("/sbin/busybox", "unzip", "/tmp/magisk/Magisk.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/magisk");')
-  script.Print("Installing Magisk...");
-  script.AppendExtra('run_program("/sbin/busybox", "sh", "/tmp/magisk/META-INF/com/google/android/update-binary", "null", "1", "/tmp/magisk/Magisk.zip");')
-
-  script.Print("Cleaning up...");
-  script.AppendExtra('delete_recursive("/tmp/magisk");')
-
-  script.Print("Installation complete!");
 
   if OPTIONS.wipe_user_data:
     script.ShowProgress(0.1, 10)
