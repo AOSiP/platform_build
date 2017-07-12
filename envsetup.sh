@@ -20,6 +20,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
+- gerrit:    Adds a remote for AOSiP Gerrit
 
 EOF
 
@@ -1541,6 +1542,21 @@ function godir () {
         pathname=${lines[0]}
     fi
     \cd $T/$pathname
+}
+
+function gerrit() {
+    if [ ! -d ".git" ]; then
+        echo -e "Please run this inside a git directory";
+    else
+        if [ -d ".git/refs/remotes/gerrit" ]; then
+            git remote rm gerrit;
+        fi
+        if [[ -z "${GERRIT_USER}" ]]; then
+            git remote add gerrit $(git remote -v | grep AOSiP | awk '{print $2}' | uniq | sed -e 's|https://github.com/AOSiP|ssh://review.aosiprom.com:29418/AOSIP|');
+        else
+            git remote add gerrit $(git remote -v | grep AOSiP | awk '{print $2}' | uniq | sed -e 's|https://github.com/AOSiP|ssh://${GERRIT_USER}@review.aosiprom.com:29418/AOSIP|');
+        fi
+    fi
 }
 
 # Force JAVA_HOME to point to java 1.7/1.8 if it isn't already set.
