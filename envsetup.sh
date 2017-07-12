@@ -21,6 +21,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
+- gerrit:    Adds a remote for AOSiP Gerrit
 
 Environment options:
 - SANITIZE_HOST: Set to 'true' to use ASAN for all host modules. Note that
@@ -1523,6 +1524,17 @@ function mka() {
 function repopick() {
     T=$(gettop)
     $T/build/tools/repopick.py $@
+}
+
+function gerrit() {
+    if [ ! -d ".git" ]; then
+        echo -e "Please run this inside a git directory";
+    else
+        if [ -d ".git/refs/remotes/gerrit" ]; then
+            git remote rm gerrit;
+        fi
+        git remote add gerrit $(git remote -v | grep aosip | awk '{print $2}' | uniq | sed -e 's|https://github.com/AOSiP|ssh://review.aosiprom.com:29418/AOSIP|');
+    fi
 }
 
 # Force JAVA_HOME to point to java 1.7 if it isn't already set.
