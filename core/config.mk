@@ -231,6 +231,9 @@ include $(BUILD_SYSTEM)/envsetup.mk
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 
 -include vendor/extra/BoardConfigExtra.mk
+ifneq ($(AOSIP_BUILD),)
+include vendor/aosip/config/BoardConfigAOSiP.mk
+endif
 
 # The build system exposes several variables for where to find the kernel
 # headers:
@@ -1174,6 +1177,18 @@ dont_bother_goals := out \
 ifeq ($(CALLED_FROM_SETUP),true)
 include $(BUILD_SYSTEM)/ninja_config.mk
 include $(BUILD_SYSTEM)/soong_config.mk
+endif
+
+ifneq ($(AOSIP_BUILD),)
+## We need to be sure the global selinux policies are included
+## last, to avoid accidental resetting by device configs
+# $(eval include device/aosip/sepolicy/common/sepolicy.mk)
+
+# Include any vendor specific config.mk file
+-include $(TOPDIR)vendor/*/build/core/config.mk
+
+# Include any vendor specific apicheck.mk file
+-include $(TOPDIR)vendor/*/build/core/apicheck.mk
 endif
 
 -include external/linux-kselftest/android/kselftest_test_list.mk
