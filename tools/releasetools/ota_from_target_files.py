@@ -468,6 +468,25 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: %s" % target_fp)
 
+  script.Print("--------------------------------------------------")
+  script.Print("    / AAAAAA  / OOOOOO   /ssssss /ii| /PPPPPP     ")
+  script.Print("   / AA__  AA/ OO__  OO /SS__ SS||__/| PP__ PP    ")
+  script.Print("   | AA  \ AA| OO  \ OO| SS  \__/ /ii| PP  \ PP   ")
+  script.Print("   | AAAAAAAA| OO  | OO|  SSSSSS | ii| PPPPPPP/   ")
+  script.Print("   | AA__  AA| OO  | OO \____  SS| ii| PP____/    ")
+  script.Print("   | AA  | AA| OO  | OO /SS  \ SS| ii| PP         ")
+  script.Print("   | AA  | AA|  OOOOOO/| SSSSSS/ | ii| PP         ")
+  script.Print("   |__/  |__/ \______/  \______/ |__/|__/         ")
+  script.Print("                                                  ")
+  script.Print("         Are you ready for the Illusion?          ")
+  script.Print("--------------------------------------------------")
+  device = GetBuildProp("ro.product.device", OPTIONS.info_dict)
+  model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
+  modver = GetBuildProp("ro.aosip.version", OPTIONS.info_dict)
+  script.Print(" ")
+  script.Print("Device: %s (%s)"%(model, device))
+  script.Print("Version: %s"%(modver)); 
+
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
