@@ -411,7 +411,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
         "post-timestamp": GetBuildProp("ro.build.date.utc", OPTIONS.info_dict),
     }
   else:
-  metadata = {
+    metadata = {
       "post-build": target_fp,
       "pre-device": GetOemProperty("ro.product.device", oem_props,
                                    oem_dicts and oem_dicts[0],
@@ -680,7 +680,7 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
         "ota-type": "BLOCK",
     }
   else:
-  metadata = {
+    metadata = {
       "pre-device": GetOemProperty("ro.product.device", source_oem_props,
                                    oem_dicts and oem_dicts[0],
                                    OPTIONS.source_info_dict),
