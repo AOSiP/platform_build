@@ -643,6 +643,7 @@ my_target_global_ldflags := $($(LOCAL_2ND_ARCH_VAR_PREFIX)CLANG_$(my_prefix)GLOB
         ifeq ($(strip $(my_cxx)),)
             my_cxx := $(my_cxx_wrapper) $(SDCLANG_PATH)/clang++
         endif
+        endif
         ifeq ($(my_sdclang_2),true)
         ifeq ($(strip $(my_cc)),)
             my_cc := $(SDCLANG_PATH_2)/clang
