@@ -171,6 +171,7 @@ include $(BUILD_SYSTEM)/device.mk
 # A AOSiP build needs only the AOSiP product makefiles.
 ifneq ($(AOSIP_BUILD),)
   all_product_configs := $(shell find device -path "*/$(AOSIP_BUILD)/aosip.mk")
+  all_product_configs += $(wildcard vendor/aosip/build/target/product/aosip_$(AOSIP_BUILD).mk)
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
