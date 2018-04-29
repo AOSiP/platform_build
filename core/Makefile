@@ -312,7 +312,7 @@ endif
 			TARGET_UNIFIED_DEVICE="$(TARGET_UNIFIED_DEVICE)" \
 			$(PRODUCT_BUILD_PROP_OVERRIDES) \
 	        bash $(BUILDINFO_SH) >> $@
-ifeq ($(TARGET_COPY_OUT_VENDOR),system)
+ifeq ($(TARGET_COPY_OUT_VENDOR),vendor)
 	$(hide) TARGET_DEVICE="$(TARGET_DEVICE)" \
 			PRODUCT_NAME="$(TARGET_PRODUCT)" \
 			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
@@ -360,7 +360,7 @@ endif
 # vendor build.prop
 #
 # Prevent overwriting build.prop in system
-ifneq ($(TARGET_COPY_OUT_VENDOR),system)
+ifneq ($(TARGET_COPY_OUT_VENDOR),vendor)
 # For verifying that the vendor build is what we think it is
 INSTALLED_VENDOR_BUILD_PROP_TARGET := $(TARGET_OUT_VENDOR)/build.prop
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_VENDOR_BUILD_PROP_TARGET)
@@ -409,7 +409,7 @@ ifdef property_overrides_split_enabled
 		echo "$(line)" >> $@;)
 	$(hide) build/tools/post_process_props.py $@
 endif  # property_overrides_split_enabled
-endif  # TARGET_COPY_OUT_VENDOR=system
+endif  # TARGET_COPY_OUT_VENDOR=vendor
 
 # ----------------------------------------------------------------
 
