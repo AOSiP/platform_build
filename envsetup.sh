@@ -652,6 +652,9 @@ function lunch()
     fi
 
     check_product $product
+
+    export TARGET_PRODUCT=$product
+
     if [ $? -ne 0 ]
     then
         # if we can't find a product, try to grab it off the aosipOS GitHub
@@ -685,7 +688,6 @@ function lunch()
         return 1
     fi
 
-    export TARGET_PRODUCT
     export TARGET_BUILD_VARIANT
     if [ -n "$version" ]; then
       export TARGET_PLATFORM_VERSION
