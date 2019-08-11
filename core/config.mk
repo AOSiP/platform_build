@@ -238,10 +238,6 @@ FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 $(call project-set-path-variant,ril,TARGET_RIL_VARIANT,hardware/ril)
 
 -include vendor/extra/BoardConfigExtra.mk
-ifneq ($(AOSIP_BUILD),)
-include vendor/aosip/config/BoardConfigAOSiP.mk
-endif
-
 # The build system exposes several variables for where to find the kernel
 # headers:
 #   TARGET_DEVICE_KERNEL_HEADERS is automatically created for the current
@@ -1187,6 +1183,8 @@ ifneq ($(AOSIP_BUILD),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
 # $(eval include device/aosip/sepolicy/common/sepolicy.mk)
+include vendor/aosip/config/BoardConfigAOSiP.mk
+endif
 
 # Include any vendor specific config.mk file
 -include $(TOPDIR)vendor/*/build/core/config.mk
