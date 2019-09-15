@@ -190,7 +190,6 @@ PRODUCT_PACKAGES += \
     libwifi-service \
     libwilhelm \
     linker \
-    lmkd \
     LocalTransport \
     locksettings \
     logcat \
