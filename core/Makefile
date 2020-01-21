@@ -1877,8 +1877,8 @@ define build-recoveryramdisk
   $(hide) mkdir -p $(TARGET_RECOVERY_OUT)
   $(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)
   $(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/*
-  $(hide) cp $(TARGET_PREBUILT_RECOVERY_RAMDISK_CPIO) $(OUT_DIR)/prebuilt_ramdisk-recovery.cpio
-  $(hide) cd $(TARGET_RECOVERY_ROOT_OUT) && cpio -id < $(OUT_DIR)/prebuilt_ramdisk-recovery.cpio && cd -
+  $(hide) cp $(TARGET_PREBUILT_RECOVERY_RAMDISK_CPIO) $(TARGET_RECOVERY_ROOT_OUT)/prebuilt_ramdisk-recovery.cpio
+  $(hide) cd $(TARGET_RECOVERY_ROOT_OUT) && cpio -id < prebuilt_ramdisk-recovery.cpio && rm prebuilt_ramdisk-recovery.cpio && $(hide) cd -
 endef
 else
 define build-recoveryramdisk
