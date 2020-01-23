@@ -46,7 +46,7 @@ PRODUCT_PACKAGES += \
     LatinIME
 endif
 
-ifeq ($(filter blueline bonito coral crosshatch flame sargo taimen walleye,$(aosip_device)),)
+ifeq ($(filter blueline bonito coral crosshatch flame sargo taimen walleye,$(AOSIP_DEVICE)),)
 PRODUCT_PACKAGES += SystemUIGoogle
 else
 PRODUCT_PACKAGES += SystemUI
