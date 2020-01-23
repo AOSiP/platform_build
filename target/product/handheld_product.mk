@@ -37,7 +37,6 @@ PRODUCT_PACKAGES += \
     Settings \
     SettingsIntelligence \
     StorageManager \
-    SystemUI \
     WallpaperCropper \
     frameworks-base-overlays
 
@@ -46,10 +45,10 @@ PRODUCT_PACKAGES += \
     LatinIME
 endif
 
-ifeq ($(filter blueline bonito coral crosshatch flame sargo taimen walleye,$(aosip_device)),)
-PRODUCT_PACKAGES += SystemUIGoogle
-else
+ifeq ($(filter blueline bonito coral crosshatch flame sargo taimen walleye, $(AOSIP_DEVICE)),)
 PRODUCT_PACKAGES += SystemUI
+else
+PRODUCT_PACKAGES += SystemUIGoogle
 endif
 
 PRODUCT_PACKAGES_DEBUG += \
