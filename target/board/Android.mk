@@ -25,7 +25,7 @@ $(INSTALLED_ANDROID_INFO_TXT_TARGET): $(board_info_txt)
 ifdef board_info_txt
 	$(hide) grep -v '#' $< > $@
 else
-	$(hide) echo "board=$(TARGET_BOOTLOADER_BOARD_NAME)" > $@
+	$(hide) echo " " > $@
 endif
 
 # Copy compatibility metadata to the device.
