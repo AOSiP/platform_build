@@ -818,8 +818,14 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     # be re-added.
     dynamic_partitions_diff = common.DynamicPartitionsDifference(
         info_dict=OPTIONS.info_dict,
+<<<<<<< HEAD   (3dc30b Build:mainline_system: dont enforce rro)
         block_diffs=block_diff_dict.values(),
         progress_dict=progress_dict)
+=======
+        block_diffs=block_diffs,
+        progress_dict=progress_dict,
+        build_without_vendor=(not HasVendorPartition(input_zip)))
+>>>>>>> CHANGE (81ccd6 releasetools: do not remove dynamic partitions in system-onl)
     dynamic_partitions_diff.WriteScript(script, output_zip,
                                         write_verify_script=OPTIONS.verify)
   else:
