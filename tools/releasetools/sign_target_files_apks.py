@@ -395,9 +395,10 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
        if GetApkFileInfo(i.filename, compressed_extension, [])[0]])
   system_root_image = misc_info.get("system_root_image") == "true"
 
+  vendor_image_built = misc_info.get("vendor_fs_type")
   for info in input_tf_zip.infolist():
     filename = info.filename
-    if filename.startswith("IMAGES/"):
+    if filename.startswith("IMAGES/") and not filename.endswith("vendor.img") and vendor_image_built is not None:
       continue
 
     # Skip split super images, which will be re-generated during signing.

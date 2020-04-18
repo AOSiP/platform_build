@@ -710,7 +710,7 @@ def AddImagesToTargetFiles(filename):
     OPTIONS.input_tmp = common.UnzipTemp(filename)
 
   if not OPTIONS.add_missing:
-    if os.path.isdir(os.path.join(OPTIONS.input_tmp, "IMAGES")):
+    if os.path.isdir(os.path.join(OPTIONS.input_tmp, "IMAGES")) and not os.path.exists(os.path.join(OPTIONS.input_tmp, "IMAGES", "vendor.img")):
       logger.warning("target_files appears to already contain images.")
       sys.exit(1)
 
