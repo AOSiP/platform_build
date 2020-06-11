@@ -54,6 +54,11 @@ EOF
     echo $A
 }
 
+# Repo sync with various flags I'm lazy to type each time
+function syncc() {
+    time repo sync --force-sync --no-clone-bundle --current-branch --no-tags "$@"
+}
+
 # Get all the build variables needed by this script in a single call to the build system.
 function build_build_var_cache()
 {
