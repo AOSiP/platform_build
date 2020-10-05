@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85d1e50a_e640f4ed",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-05T12:10:22Z",
+      "side": 1,
+      "message": "RIP why did LOS merge this, its broken :P",
+      "revId": "71dbe95047465122a4ad094552509c298fc6696c",
+      "serverId": "44769751-fbfc-497d-9c9a-4bb318a4117c",
+      "unresolved": true
+    }
+  ]
+}
