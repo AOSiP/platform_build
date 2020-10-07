@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fad1e83_47cf4fe2",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 5010,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-07T12:38:07Z",
+      "side": 1,
+      "message": "backuptool isn\u0027t just for gapps, imo this makes no sense\nanyway if you\u0027re not flashing gapps no addon.d stuff will be present for gapps.",
+      "revId": "d3b95139460e749e7cee0836944b744476090ea9",
+      "serverId": "44769751-fbfc-497d-9c9a-4bb318a4117c",
+      "unresolved": true
+    }
+  ]
+}
